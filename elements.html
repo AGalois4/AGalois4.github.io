@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe"> </script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    init_mathjax = function() {
+        if (window.MathJax) {
+        // MathJax loaded
+            MathJax.Hub.Config({
+                TeX: {
+                    equationNumbers: {
+                    autoNumber: "AMS",
+                    useLabelIds: true
+                    }
+                },
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true,
+                    processEnvironments: true
+                },
+                displayAlign: 'center',
+                CommonHTML: {
+                    linebreaks: {
+                    automatic: true
+                    }
+                }
+            });
+
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+    }
+    init_mathjax();
+    </script>
+    <!-- End of mathjax configuration -->
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Armando R.</strong> Investigador y Académico</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+										<li class="icon solid fa-envelope"><a href="#"> army.arg4@ciencias.unam.mx</a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Regresión Lineal</h1>
+									</header>
+
+									
+
+
+									<hr class="major" />
+
+									<h2>Una variable explicativa: regresión simple</h2>
+									
+									<p>Vimos $\def\b{\beta}
+\def\ie{\begin{eqnarray}}
+\def\fe{\end{eqnarray}}
+\def\ies{\begin{eqnarray*}}
+\def\fes{\end{eqnarray*}}
+\def\R{\mathbb{R}}$ en clase que $SEC(\b_0,\b_1)=\sum e_i^2=\sum (y_i-\b_0-\b_1x_i)^2$ es la suma de errores cuadráticos: la suma de las áreas de cuadrados construidos con las distancias de los puntos observados a una recta con ordenada inicialmente arbitraria con ordenada $\b_0$ y pendiente $\b_1$.</p>
+<p>Se dijo también en clase que ya que el conjunto de sumas de cuadrados $A=\{SEC(\b_0,\b_1)|\ \b_0,\b_1\in\R\}$, donde cada suma se obtiene para cada una de las infinitas rectas que se puden obtener al cambiar la ordenada $\b_0$ y pendiente $\b_1$, está acotado por abajo por 0 (ya que sumar áreas de cuadrados que son positivas o cero, siempre da un valor positivo o 0), entonces existen ciertos $\hat{\b}_0$ y $\hat{\b}_1$ que permiten obtener el valor mínimo de esa suma de cuadrados $SEC(\hat{\b}_0,\hat{\b}_1)$.</p>
+<p>Ahora, para obtener esos valores $\hat{\b}_0$ y $\hat{\b}_1$ es necesario realizar un proceso de óptimización. Este comienza encontrando las derivadas parciales de $SEC(\b_0,\b_1)$ con respecto de la ordenada y pendiente e igualando a 0 cada una:</p>
+<p>$\hspace{5cm}\ies
+0&amp;=&amp;\frac{\partial E(\b_0,\b_1 )}{\partial \b_0}
+= 2\sum(y_i-\hat{\b}_0 -\hat{\b}_1 x_i )(-1)
+=
+-2\sum y_i+2n\hat{\b}_0 +2\hat{\b}_1\sum x_i\\
+\\
+0&amp;=&amp;\frac{\partial E(\b_0,\b_1 )}{\partial \b_1}
+=2\sum(y_i-\hat{\b}_0 -\hat{\b}_1 x_i )(-x_i)
+=
+-2\sum y_ix_i+2\hat{\b}_0\sum x_i +2\hat{\b}_1\sum x^2_i
+\fes
+$</p>
+<p>posteriormente se reacomodan los términos, dividiendo además las ecuaciones entre 2, obtiendo así el sistema de ecuaciones</p>
+<p>$\ies
+n\hat{\b}_0 +\hat{\b}_1\sum x_i&amp;=&amp;\sum y_i\\
+\\
+\hat{\b}_0\sum x_i +\hat{\b}_1\sum x^2_i&amp;=&amp;\sum y_ix_i
+\fes$</p>
+<p>y que en notación compacta (matricial) resulta</p>
+<p>$\ies
+\begin{pmatrix}
+ n&amp;\sum x_i\\
+ \sum x_i&amp;\sum x^2_i
+\end{pmatrix}\begin{pmatrix}
+\hat{\b}_0\\
+\hat{\b}_1
+\end{pmatrix}=\begin{pmatrix}
+\sum y_i\\
+\sum y_ix_i
+\end{pmatrix}
+\fes$</p>
+<p>Llamando a la matriz en esta expresión como $A$, es fácil descubir que su inversa es</p>
+<p>$\hspace{5cm}\ies
+A^{-1}=\frac{1}{\det{A}}\begin{pmatrix}
+ \sum x^2_i&amp;-\sum x_i\\
+ -\sum x_i&amp;n
+\end{pmatrix}
+\fes$</p>
+<p>donde el determinante esta dado por</p>
+<p>$\ies
+\det A&amp;=&amp;n\sum x_i^2-\sum x_i\sum x_i=n\sum x_i^2-n^2\bar{x}^2
+=n\left(\sum x_i^2-n\bar{x}^2\right)=n\sum\left( x_i^2-\bar{x}^2\right)\\
+&amp;=&amp;
+n\sum\left( x_i^2+(\bar{x}^2-\bar{x}^2)-\bar{x}^2\right)=n\sum\left( x_i^2+\bar{x}^2-2\bar{x}^2\right)
+=
+n\sum\left( x_i^2+(2x_i\bar{x}-2x_i\bar{x})\bar{x}^2-2\bar{x}^2\right)\\
+&amp;=&amp;
+n\sum\left( (x_i-\bar{x})^2+2x_i\bar{x}-2\bar{x}^2\right)=n\left(\sum (x_i-\bar{x})^2+2\bar{x}\sum x_i-2n\bar{x}^2\right)\\
+&amp;=&amp;
+n\left(\sum (x_i-\bar{x})^2+2n\bar{x}^2-2n\bar{x}^2\right)=n\left(\sum (x_i-\bar{x})^2\right)
+\fes$</p>
+<p>Por consiguiente, resolviendo el sistema matricial empleando la matriz $A^{-1}$, podemos recuperar los betas estimados</p>
+<p>$\hspace{5cm}\ies
+\begin{pmatrix}
+\hat{\b}_0\\
+\hat{\b}_1
+\end{pmatrix}=A^{-1}\begin{pmatrix}
+\sum y_i\\
+\sum y_ix_i
+\end{pmatrix}=
+\begin{pmatrix}
+ \dfrac{\sum x^2_i\sum y_i-\sum x_i\sum y_ix_i}{n\left(\sum (x_i-\bar{x})^2\right)}\\
+ \\
+ \dfrac{-\sum x_i\sum y_i+n\sum y_ix_i}{n\left(\sum (x_i-\bar{x})^2\right)}
+\end{pmatrix}
+=
+\begin{pmatrix}
+ \dfrac{\bar{y}\sum x^2_i-\bar{x}\sum y_ix_i}{\sum (x_i-\bar{x})^2}\\
+ \\
+ \dfrac{-n\bar{x}\bar{y}+\sum y_ix_i}{\sum (x_i-\bar{x})^2}
+\end{pmatrix}
+\fes$</p>
+<p>es más, ya que $\textbf{(i)}$ el numerador de $\hat{\b}_1$ se puede escribir como</p>
+<p>$\ies
+-n\bar{x}\bar{y}+\sum y_ix_i&amp;=&amp;
+\sum \left(y_ix_i-\bar{x}\bar{y} \right)
+=
+\sum \left(y_ix_i+(y_i\bar{x}-y_i\bar{x})-\bar{x}\bar{y} \right)
+=
+\sum \left(y_i(x_i-\bar{x})+y_i\bar{x}-\bar{x}\bar{y} \right)\\
+&amp;=&amp;
+\sum y_i(x_i-\bar{x})+\bar{x}\sum y_i-n\bar{x}\bar{y}
+=
+\sum y_i(x_i-\bar{x})+n\bar{x}\bar{y}-n\bar{x}\bar{y}\\
+&amp;=&amp;\sum y_i(x_i-\bar{x})
+\fes$</p>
+<p>y que $\textbf{(ii)}$ el númerador de $\hat{\b}_0$ se puede ver de la siguiente manera</p>
+<p>$\ies
+\bar{y}\sum x^2_i-\bar{x}\sum y_ix_i&amp;=&amp;
+\bar{y}\sum x^2_i-\bar{x}\sum (y_ix_i+(-y_i\bar{x}+y_i\bar{x}) )
+=
+\bar{y}\sum x^2_i-\bar{x}\sum (y_i(x_i-\bar{x})+y_i\bar{x} )\\
+&amp;=&amp;
+\bar{y}\sum x^2_i-\bar{x}\sum y_i(x_i-\bar{x})-n\bar{x}^2\bar{y}\\
+&amp;=&amp;
+\bar{y}\sum \left((x_i-\bar{x})^2-\bar{x}^2+2x_i\bar{x}\right)-\bar{x}\sum y_i(x_i-\bar{x})-n\bar{x}^2\bar{y}
+\\
+&amp;=&amp;
+\bar{y}\sum (x_i-\bar{x})^2-n\bar{x}^2\bar{y}+2n\bar{x}^2\bar{y}-\bar{x}\sum y_i(x_i-\bar{x})-n\bar{x}^2\bar{y}\\
+&amp;=&amp;\bar{y}\sum (x_i-\bar{x})^2-\bar{x}\sum y_i(x_i-\bar{x})
+\fes$</p>
+<p>entonces los betas los podemos ver como</p>
+<p>$\ies
+\begin{pmatrix}
+\hat{\b}_0\\
+\hat{\b}_1
+\end{pmatrix}=
+\begin{pmatrix}
+ \dfrac{\bar{y}\sum (x_i-\bar{x})^2-\bar{x}\sum y_i(x_i-\bar{x})}{\sum (x_i-\bar{x})^2}\\
+ \\
+ \dfrac{\sum y_i(x_i-\bar{x})}{\sum (x_i-\bar{x})^2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+ \bar{y}-\bar{x}\hat{\b}_1\\
+ \\
+ \dfrac{\sum y_i(x_i-\bar{x})}{\sum (x_i-\bar{x})^2}
+\end{pmatrix}
+\fes$</p>
+<p>Así mismo, ya que $\hat{\b}_0=\bar{y}-\bar{x}\hat{\b}_1$ y que $V(\hat{\b_1})=\frac{\sigma^2}{S_{xx}}$ con $S_{xx}=\sum (x_i-\bar{x})^2$; $V(\bar{y})=\frac{\sigma^2}{n}$; $Cov(\bar{y},-\bar{x}\hat{\b}_1)=0$;  $V(x+y)=V(x)+V(y)-Cov(x,y)$; y que $V(ax)=a^2V(x)$ con $a\in\R$, entonces</p>
+<p>$\ies
+V(\hat{\b}_0)&amp;=&amp;V(\bar{y}-\bar{x}\hat{\b}_1)
+=
+V(\bar{y})+V(-\bar{x}\hat{\b}_1)-Cov(\bar{y},-\bar{x}\hat{\b}_1)
+=
+\frac{\sigma^2}{n}+\bar{x}^2V(\hat{\b}_1)
+=
+\frac{\sigma^2}{n}+\bar{x}^2\frac{\sigma^2}{S_{xx}}=
+\sigma^2\left(\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}}\right)
+\fes$</p>
+									
+									
+									
+									
+
+									<hr class="major" />
+
+									<h2>Lorem aliquam bibendum</h2>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">INICIO</a></li>
+										<li><a href="generic.html">Notas Econometría</a></li>
+										<li><a href="elements.html">Álgebra Lineal</a></li>
+										<li>
+											<span class="opener">Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							
+										
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
